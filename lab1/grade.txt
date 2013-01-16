@@ -1,0 +1,6 @@
+bar.txt does not exist
+garbage.txt is not removed
+stuff/baz.txt is not moved
+stuff/junk.txt does not exist
+foo.txt is not updated
+Total: 0/5
