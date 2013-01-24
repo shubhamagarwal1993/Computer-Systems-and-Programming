@@ -1,0 +1,6 @@
+Signed integer computation: /6 
+Unsigned integer computation: /7 
+Bitwise logic: /6 
+Bit shifting:  /5 
+
+TOTAL: /24
