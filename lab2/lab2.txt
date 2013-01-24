@@ -2,36 +2,144 @@
 Signed integer computation
 
 1. What is the largest value representable in 16-bit signed format? Smallest?
+largest value = 32767 (2^14 + 2^13 +.....2^0)
+smallest value = -32768 (100000000000000 15zeros), take complement we get 0111111111111111, add 1 we get 1000000000000000, 2^15 and that is 32768
+
+
 2. What is the result of the third computation? Why?
+21000+22000 = -22536(xa7f8) because the computer first finds the value in signed mode and then converts it to signed 16 bits.
+
+
 3. Why does the fourth computation overflow, but not the fifth?
+the fourth computation gives a value of 32768(which is greater that the max value as seen in question 1 ), but the fifth computation gives a value of -32768 (which is exactly equal to the smallest possible value.)
+
+
 4. If you were to start at 0, and increment repeatedly (add 1), what pattern would you see (in signed mode)?
+0 to 9 (x0009)
+10 to 15 (x000a, 000b...000f)
+16 to 31 (x001f)
+.
+.
+we see a constatnty incresing pattern of numbers and alphabet on a scale of 16 till we reach the maximum possible value.
+
+
+
+
 
 Unsigned integer computation
 
 1. What is the largest value representable in 16-bit unsigned format? Smallest?
+the largest value is 65535(xffff) because all the 16 bits would be used and the value will be (2^15+2^14.....2^0)
+
+the smallest value be 0 because there is no bits for representing sign and thus all bits would be 0
+
+
+
 2. What result do you get from the first computation? Why?
+The result we get is 65437 because the computer first represents the negative answer in a signed mode and then converts it to an unsigned mode giving us a great positive value. In the same way, -1 would give 65536.
+
+
 3. Why doesn't the second or third computation overflow?
+both the computations lie within the maximum range of unsigned 16 bits and so they don't overflow.
+
+
 4. If you were to start at 0, and increment repeatedly (add 1), what pattern would you see (in unsigned mode)?
+we see that the numbers rise from 0 to 9 as it is. after that from 10 it changes to (x000a) and keeps increasing till 25 when we get (x0019). after 25 we get 26 which is (x001a) and so on till we reach the maximum value.
+
+
+
+
 5. What are the advantages and disadvantages of unsigned formats (compared to signed formats)?
+advantages of unsigned formats are:
+1. one representation of zero.
+2. simple addition 
+
+disadvantages of unsigned formats are:
+1. we cannot represent negative values 
+
+
 
 
 Bitwise logic
 
 1. What are computations 1-3 doing? (what does a function that computes f(x) = x & 1 do?)
+the "&' sign represents an 'AND' function and the computations from 1 to 3 are computing the AND function for all of them. 
+(x01fa) which is 506 is represented as 111111010 and 1 as 0000000001. So the AND function is 00000000. Similarly for all the three cases. 
+
+
+
 2. What are computations 4-6 doing? (hint: suppose each of the 16 bits bit represents a light switch that is either on or off)
+in problem 4 to 6, the sign ">>4" shows shift to right four times.
+thus, x01fa would actually be 111111010 and after shifting it would be 000011111. Now 000011111 & 000000001 is 000000001. Thus we get either a 1 or a 0 for problems 4 to 6 and this is like an 'on' 'off' function or a switch.   
+
+
+
+
+
 3. Continuing with the a light switch (or similar) analogy, what is computation 7 doing?
+in 7, we take the "OR" function. 0001 OR 10000000 which is 10000001. Now 10000001 OR 01000000 which is 11000001. 
+
+
 4. Why does computation 8 produce a nonzero result, but computation 9 produces zero?
+the value of 11000001 & 10000000 gives 10000000 because the Highest Value Bit is 1 in both the functions and 1&1 gives a 1.
+
+computation 9 gives 00000001 OR 01000000 gives 01000001 and 01000001 & 10000000 gives 0 because all the bits coincidinig at the same place in '01000001' and '10000000' are a combination of 0 and 1.
+
+
+
 5. What is computation 10 doing? (what does a function that computes f(x) = x & ~1 do?)
+The ~ function represents NOT and thus ~1 represents 0. x & ~1 means taking the AND function of 'x' and 'NOT of 1 which is 0'. 
+
+
+100010111111111 & 000000000000000 gives 0. 
+
+
+
 6. Compare the results of computation 11 and 12. Can you explain?
+the sign '^' represents 'XOR' function.
+
+In problem 11, we take the XOR of (x1234) which is 1001000110100 and (x5678) which is 101011001111000. the XOR of the two is 100010001001100. 
+
+In problem 12, we take the AND of (x1234) which is 1001000110100 and NOT of (x5678) which is 010100110000111. the AND of the two is 000000000000100.
+
 
 
 Bit shifting
 
 1. Looking at the results from computations 1-5, do you see a pattern? What's going on? What does the left-shift operation effectively do?
+From quetions 1 to 5, the bit 1 in 0000000000000100 is shifting to the left by the number specified after the sign '<<'. Thus 4<<0 is 4, 4<<1 is 8, 4<<2 is 16, 4<<3 is 32, and 4<<4 is 64. 
+
+the bits all shift one place to left replacing the right most bit by a 0. the left-shift pattern effectively shifts the bits by some places to their left.
+
+
 2. Given this definition of “<<”, is the result from computation #6 what you would expect? What's happening?
+the binary representation of 9 is 0000000000001001,. Thus, <<14 means shifting 14 places to left and thus some of the 1s might overflow. the result should be 0100000000000000 which is equal to 2^14 and that is 16384.
+
+
+
 3. Why is the result from computation #7 negative?
+1 is 0000000000000001 and <<15 means shifting 15 places left. thus the result would be 1000000000000000. in signed 16 bits, the Highest Value Bit shows the sign and since the answer has a 1 in that place, we get a negative number. 
+
+
+
 4. Looking at the results from computations 8-11, what does the right-shift operation effectively do? (Hint: Try doing integer divisions with the same divisor)
+From quetions 8 to 11 the number 10 shown in bits by 0000000000001010 is shifting to the right by the number specified after the sign '>>'.
+Thus we get 10>>0 is 10, 10>>1 is 5, 10>>2 is 2, and 10>>3 is 1.
+
+The right-shfit operation effectively shifts the bits in a binary number to the right by the specified number after ">>".
+
+
+
+
 5. Thinking of the right-shift operation as a shift operation, there's a simple explanation for why the result of computation 12 is 0. What is it? (Hint: how does a computer encode decimal 10 in signed 16-bit?)
+
+In signed 16 mode, the decimal number 10 is representes by 000000000000000a.
+
+However, the computer encodes decimal 10 as 0000000000001010 (converts to binary), right shifts by 12, and thenn reconverts to hexadecimal.
+
+So , 000000000000000a would become 0000000000001010 and then all the bits in the binary number are shifted by 12 making all the 1s fall out of the Least Significat bit.
+
+ Thus, we get the answer as 0.
 
 
 --------------------------
