@@ -87,7 +87,7 @@ computation 9 gives 00000001 OR 01000000 gives 01000001 and 01000001 & 10000000 
 
 
 
-5. What is computation 10 doing? (what does a function that computes f(x) = x & ~1 do?)
+x5. What is computation 10 doing? (what does a function that computes f(x) = x & ~1 do?)
 The ~ function represents NOT and thus ~1 represents 0. x & ~1 means taking the AND function of 'x' and 'NOT of 1 which is 0'. 
 
 
@@ -95,7 +95,7 @@ The ~ function represents NOT and thus ~1 represents 0. x & ~1 means taking the 
 
 
 
-6. Compare the results of computation 11 and 12. Can you explain?
+x6. Compare the results of computation 11 and 12. Can you explain?
 the sign '^' represents 'XOR' function.
 
 In problem 11, we take the XOR of (x1234) which is 1001000110100 and (x5678) which is 101011001111000. the XOR of the two is 100010001001100. 
@@ -106,7 +106,7 @@ In problem 12, we take the AND of (x1234) which is 1001000110100 and NOT of (x56
 
 Bit shifting
 
-1. Looking at the results from computations 1-5, do you see a pattern? What's going on? What does the left-shift operation effectively do?
+x1. Looking at the results from computations 1-5, do you see a pattern? What's going on? What does the left-shift operation effectively do?
 From quetions 1 to 5, the bit 1 in 0000000000000100 is shifting to the left by the number specified after the sign '<<'. Thus 4<<0 is 4, 4<<1 is 8, 4<<2 is 16, 4<<3 is 32, and 4<<4 is 64. 
 
 the bits all shift one place to left replacing the right most bit by a 0. the left-shift pattern effectively shifts the bits by some places to their left.
@@ -122,7 +122,7 @@ the binary representation of 9 is 0000000000001001,. Thus, <<14 means shifting 1
 
 
 
-4. Looking at the results from computations 8-11, what does the right-shift operation effectively do? (Hint: Try doing integer divisions with the same divisor)
+x4. Looking at the results from computations 8-11, what does the right-shift operation effectively do? (Hint: Try doing integer divisions with the same divisor)
 From quetions 8 to 11 the number 10 shown in bits by 0000000000001010 is shifting to the right by the number specified after the sign '>>'.
 Thus we get 10>>0 is 10, 10>>1 is 5, 10>>2 is 2, and 10>>3 is 1.
 
