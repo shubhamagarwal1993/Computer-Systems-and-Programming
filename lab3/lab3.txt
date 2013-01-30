@@ -1,0 +1,7 @@
+a) num1=10000 and num2=0  output - Mystery program...invalid input!     
+
+b) num1=10 and num2=200   output - Mystery program...invalid input!   
+
+c) num1=20 and num2=3     output -   6
+                                     3
+                                     1
