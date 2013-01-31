@@ -1,0 +1,3 @@
+extra files have been found
+Missing program output message 'Mystery program...'
+Total: 4/6
