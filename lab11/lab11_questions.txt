@@ -1,9 +1,37 @@
 QUESTION 1.  Read through the program lab11.bin. What do you expect the program to do? More specifically, which register will the program modify when it is run, and what will it contain when the program finishes? (You can probably figure this out merely by reading the comments provided in lab11.bin.)
 
 ANSWER: 
+LINE 1:
+0011 represents 'ST'. i.e. where the program is physically stored. Here the program is stored in R3
+
+LINE 2:
+0101 represents the 'opcode' - what function the computer should perform (here AND in mode 1). 
+010 represents the destination register - where the final value will be stored.(here R2)
+010 represents the source register R2.
+00000 represents the 1st source value (here 0).
+So we AND R2 with 00000 and thus clear R2.
+
+LINE 3:
+0001 represents the 'opcode' - what function the computer should perform (here ADD in mode 1). 
+010 represents the destination register - where the final value will be stored.(here R2)
+010 represents the source register (here R2).
+01100 represents the value that will be added to R2 (here decimal value 12).
+So we ADD 00000 and 01100 and the answer 01100 (decimal value 12) will be stored in R2. 
+
+LINE 4:
+1111 represents the 'opcode' - what function the computer should perform (here trap). 
+0010 0101 represents the 8 bit trap vector.
+
+
+
+
 
 
 QUESTION 2.  Explain in a few sentences why the ability to step through a program (run one instruction at a time) is a very useful tool for debugging a program. Debugging is the process of finding and correcting bugs (or errors) in a program. Hint: Finding a bug is often much more difficult than correcting it.
 
 ANSWER: 
+The ability to go step by step makes it very easy to recognize our mistake. If the output of a particular line is different from that expected, we know where our mistake is. Or else we would have to go through the whole program and not be able to debug our mistake many times.
 
+like while adding the number 24, we have to add 12 two times since the maximum number that can be added at once is just 15. So when we run the step step process, we can see our mistake.
+
+ 
