@@ -1,10 +1,26 @@
 Question 1: Describe the errors that occur when trying to assemble lab5_code.asm. Identify the cause of each error.
 
+when we compile the code, it gives the following errors.
+14: illegal operands for missing opcode - bcoz we just have x3000, we should have .ORIG
+16: instruction appears before .ORIG - bcoz we did'nt specify the address # where the segment of the code should start, so the compiler does not know where to start storing the program.
+17: constant outside of allowed range - bcoz probably the offset x3010 does not specify the correct place for .FILL xFFFF
+19: illegal operands for ADD - bcoz we have 2 commas ',,' and we should have only one.
+30: constant outside of allowed range - bcoz probably the offset x300F does not specify the correct place from where it should pick up the value.
+32: label OUTERLOOP has already appeared - bcoz we have already used the label OUTERLOOP once in line 21 and we should use something else like OUTERLOOP1
+35: constant outside of allowed range - bcoz probably the offset x300F does not specify the correct place from where it should pick up the value.
+43: no .END directive found - bcoz we forgot to put the label .END which marks the end of the source program.
+
 
 
 Question 2: For each label in the code, write down the corresponding memory location. 
-
+OUTERLOOP - x3004
+INNERLOOP - x3005
+INPUT - x300E
+INPUT2 - x300F
+INPUT1 - x3010
+INPUT3  - x3011
 
 
 Question 3: Between using labels and explicit memory locations/offsets, which
 one makes the most sense, and why?
+Using labels makes more sense because we dont have to calculate offsets and worry about adjusting the PC. Moreover, it is easier to read the program. We have the advantage of naming a memory location and using it again and again by just typing the name, like 'INPUT' in this case. 
