@@ -1,0 +1,16 @@
+0 errors found.
+
+sorted_min_max: 20/20
+sorted_max_min: 0/20
+random: 20/20
+reg_initialization: 10/10
+proper_halt: 0/10
+Functionality Total:  50/80
+
+Lines are < 120 chars: 3/3
+Formatted properly: 7/7
+Introductory paragraph: 3/3
+Well-commented: 2/7 - comments are not informative, they just re-state the instructions
+Style/Comments Total: 15/20
+
+TOTAL: 65/100
