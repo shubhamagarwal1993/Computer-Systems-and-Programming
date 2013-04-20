@@ -1,0 +1,5 @@
+bin_file: 5/5
+question #1: 2/2
+question #3: 3/3
+
+Total: 10/10
