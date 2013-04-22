@@ -1,0 +1,16 @@
+STARTING PASS 1
+0 errors found in first pass.
+STARTING PASS 2
+0 errors found in second pass.
+
+factorial: 5/5
+reg_initialization: 0/5
+proper_halt: 5/5
+lab13_code_total: 10/15
+
+#1: 5/5
+#2: 5/5
+#3: 5/5
+lab13_answers_total: 15/15
+
+TOTAL 25/30
