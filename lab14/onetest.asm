@@ -7,4 +7,4 @@
 	.STRINGZ "Hello."
 
 	.END
-
+geditgedit

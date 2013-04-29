@@ -3,6 +3,108 @@
 ; 8 bits (the high 8 bits, for your convenience) marking pixels in the
 ; line for that character.
 
+
+;this program prints out a string 'Hello.'. It uses the characters using '*' and 'space' all stored in ASCII values.
+;sagarwl4
+;date - /29/04/2013
+
+
+.ORIG	X3000	;program starts at location x3000
+	; initializing all the registers
+	 AND	R1,R1,#0						;clear R1 - has value 0 	
+	 AND	R2,R2,#0						;clear R2 - has value 0
+	 AND	R3,R3,#0						;clear R3 - has value 0
+	 AND	R4,R4,#0						;clear R4 - has value 0
+	 AND	R5,R5,#0						;clear R5 - has value 0
+	 AND	R6,R6,#0 						;clear R6 - has value 0
+	
+	;**********************************************************************
+	;//**defining the work of each register - as it is used in the program
+	;**********************************************************************
+	;R1 - will contain the values of FONT_DATA
+	;R2 - use this as a counter for bigger loop - count down from 15
+	;R3 - will collect the address of the first character
+	;R4 - use this as a counter for smaller loop - count down from 8
+	;R5 - will contain the address of the FONT_DATA
+	;R6 - will point to the 1st char of the string 
+
+
+
+				ADD R4,R4,#15	 			; Set row counter to 15
+				LEA R5,FONT_DATA 			; Point R5 to beginning of font table
+
+
+START_EXEC 		LD R6,BEGIN_CHAR			; Point R6 to x5002
+
+	 ;********************************************
+	 ; (beginning of output string)
+	 ;*********************************************
+				LD R2,B_MASK 		        ; Use R2 as bitmask (x8000)
+
+
+CHARACTER 		LDR R1,R6,x0000 			; R1 <-- M[R6]
+	 ; Load content pointed by R6 to R1
+				BRz CIPHER	 	 			; Check if character is zero (x0000)
+				ADD R1,R1,R1				; we add R1 4 times to get new location in FONT_TABLE
+				ADD R1,R1,R1	 			;we add it 4 times to achieve the 16	
+				ADD R1,R1,R1 	 			;
+				ADD R1,R1,R1	 			;
+
+
+
+				ADD R1,R1,R5 	 			; R1 is now at required contents from font table
+				LDR R1,R1,#0 	 			; get characters from font table
+				ADD R3,R3,#8 	 			; Initialize column counter to 8
+LOOP_AND	 	AND R0,R5,x0 	 			; clear R5 - we now we have 0
+				AND R0,R2,R1 				; AND with B_mask and store the bew value in R5
+				BRnp PRINT_ASTRK			; If result was 1, print an asterisk
+
+	 ;*****************************************
+	 ; Else if result was 0, print a space
+	 ;*****************************************
+
+			 	LDI R0,SPACE	 			; Store ASCII value of space in R0
+				OUT 						; OUTPUT it
+				BRnzp SHIFT 	 			; Move on to next bit
+PRINT_ASTRK		LDI R0,ASTRK 	 			; Store ASCII value of asterisk in R0
+				OUT 						; get result 
+				BRnzp SHIFT					; Move on to next bit
+SHIFT 			ADD R1,R1,R1 				; Shift R1 left by one bit
+				ADD R3,R3,#-1 	 			; Decrement column counter
+				BRp LOOP_AND 				; If R3>0, go back to AND next bit
+				ADD R6,R6,#1	 			; If R3=0, move on to next character
+				BRnzp CHARACTER 		 	; Go back to loading next char in string
+
+	;*****************************************************
+	; CIPHER is executed when character loaded is x0000
+	;*****************************************************
+
+
+CIPHER  		ADD R4,R4,#-1 	 			; Decrement Row counter
+				BRn STOP 					; If zero, we've printed out everything, HALT
+
+	;*************************************************************************************
+	; NEXT_LINE is executed when row counter is >0 and we need to move on to the next line 
+	;*************************************************************************************
+
+
+NEXT_LINE 		AND R3,R3,x0 				; If still positive, clear colomn counter for reinitializing
+				LD R0,NEW_START				; Store ASCII value of line break
+				OUT 						; OUTPUT a new line
+				ADD R5,R5,#1 				; Increment table offset
+				BRnzp START_EXEC			; Go back to execution phase of program
+
+
+STOP			TRAP x25	 				; Halt program
+
+
+SPACE      		.FILL x5000
+ASTRK 			.FILL X5001
+BEGIN_CHAR		.FILL x5002
+B_MASK 			.FILL x8000
+NEW_START		.FILL x000A
+
+
 FONT_DATA
 	.FILL	x0000
 	.FILL	x0000
@@ -4100,3 +4202,5 @@ FONT_DATA
 	.FILL	x0000
 	.FILL	x0000
 	.FILL	x0000
+
+.END
